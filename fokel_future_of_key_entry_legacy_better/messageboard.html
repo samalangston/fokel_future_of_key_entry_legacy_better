@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FOKEL Academy - Faculty Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#255dad",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-container": "#a93802",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "secondary": "#4a5d8e",
+                        "outline-variant": "#c3c6d6",
+                        "on-primary-fixed-variant": "#00458f",
+                        "on-secondary-fixed-variant": "#324575",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#380d00",
+                        "on-tertiary-container": "#ffcebd",
+                        "on-secondary-container": "#3e5181",
+                        "on-secondary": "#ffffff",
+                        "outline": "#737785",
+                        "on-primary-container": "#c8d9ff",
+                        "secondary-fixed": "#dae2ff",
+                        "primary-container": "#265dad",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed-dim": "#abc7ff",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "secondary-fixed-dim": "#b3c5fd",
+                        "tertiary": "#822800",
+                        "inverse-primary": "#abc7ff",
+                        "surface-container": "#edeeef",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-primary-fixed": "#001b3f",
+                        "on-surface-variant": "#424654",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#004590",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "secondary-container": "#b3c5fd",
+                        "on-background": "#191c1d",
+                        "surface-container-highest": "#e1e3e4",
+                        "background": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "primary-fixed": "#d7e2ff",
+                        "on-surface": "#191c1d",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-fixed": "#001847"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .editorial-headline {
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-slate-50 flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<div>
+<h1 class="text-xl font-extrabold tracking-tight text-blue-900 leading-none">FOKEL Academy</h1>
+<p class="text-sm font-medium text-slate-500">Faculty Portal</p>
+</div>
+</div>
+<button class="w-full py-3 mb-6 bg-gradient-to-br from-primary to-primary-container text-white rounded-lg font-semibold flex items-center justify-center gap-2 scale-95 active:scale-100 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Discussion</span>
+</button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 bg-white text-blue-700 font-bold shadow-sm rounded-lg" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-medium">Direct Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="text-sm font-medium">Group Discussions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="text-sm font-medium">Resource Library</span>
+</a>
+<a class="mt-auto flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Layout -->
+<div class="ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-white/80 backdrop-blur-xl flex justify-between items-center px-8 h-16 shadow-sm">
+<div class="flex items-center gap-8">
+<span class="text-lg font-black text-blue-800 uppercase tracking-widest editorial-headline">Messaging Board</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-blue-700 border-b-2 border-blue-700 pb-1 text-sm font-semibold uppercase tracking-wide" href="#">Recent</a>
+<a class="text-slate-400 hover:text-blue-600 text-sm font-semibold uppercase tracking-wide" href="#">Pinned</a>
+<a class="text-slate-400 hover:text-blue-600 text-sm font-semibold uppercase tracking-wide" href="#">Archived</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface" placeholder="Search conversations..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:text-blue-700 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-blue-700 transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden ml-2">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a middle-aged academic woman with a kind smile, wearing glasses and a navy blazer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpbMKKA0vfWD76GHeNEbb_W8v1zOLAxJ3VH0a1L7SXhyeys7J2i2Bd71hMYzmyVD7jEseQ-JIOpIhAV0ipeWAdDbtl4B-Jr4JKvBSyLGMzFMMiacvEZSFwxXs5nASXHY9AMHjYKOm6zzPvzNF3qlVGxTTcVIMbBf6A3nkgC_tvfQ4jyQE1LC-YClLt4ISLHr1p0mM906UioJLlDFTJCvELL3K_XpYN9X4OZbp6jVt67PmWrB5zg5t3-X8dZNGq0dzUN0m8fsYDfKC0"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="mt-16 flex h-[calc(100vh-4rem)]">
+<!-- Conversations Sidebar (Secondary) -->
+<div class="w-80 bg-surface-container-low flex flex-col">
+<div class="p-6">
+<h2 class="editorial-headline text-lg font-bold text-on-surface mb-4">Active Threads</h2>
+<div class="space-y-3">
+<!-- Group Chat Active State -->
+<div class="p-3 bg-white rounded-xl shadow-sm cursor-pointer border-l-4 border-primary" id="thread-discussion" onclick="switchChat('discussion')">
+<div class="flex justify-between items-start mb-1">
+<span class="text-sm font-bold text-primary">Discussion Board</span>
+<span class="text-[10px] font-medium text-slate-400">10:24 AM</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Dr. Aris: The curriculum update is now live in the library...</p>
+<div class="mt-2 flex -space-x-2">
+<div class="w-5 h-5 rounded-full ring-2 ring-white bg-slate-300"></div>
+<div class="w-5 h-5 rounded-full ring-2 ring-white bg-slate-400"></div>
+<div class="w-5 h-5 rounded-full ring-2 ring-white bg-slate-500"></div>
+<span class="text-[10px] text-slate-400 ml-4">+8 others</span>
+</div>
+</div>
+<!-- Individual Student -->
+<div class="p-3 hover:bg-white/50 rounded-xl transition-colors cursor-pointer group" id="thread-benjamin" onclick="switchChat('benjamin')">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a young male student looking thoughtfully away, soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIGP6LcfkdIoJHaWrQDuHW_lm5Kh1DlBstU_givakBQuyArQQ5gcHD57EI5jVPhifW0gNaTqcXJVDWBohZoL6ZXP89S6J0gk3dJ7wJu4G4cUbKHSo6TfJnsd0aL1E1kVzTzyPyBmrCBrkgFEO2goEejNaJ5mpPyY8aun9FukUtY8MrXsTCApqRfuVGOVVVujMa-Uqip3nviI9xBXnN8yHX34p-Hfxw5qE_azsUHNx7ycFr22-myM8CRKQcUpGNvgWEwH4FP4Xy0k7T"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between">
+<span class="text-sm font-semibold text-on-surface">Benjamin Thorne</span>
+<span class="text-[10px] text-slate-400">Yesterday</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">I have a question about the theorem...</p>
+</div>
+</div>
+</div>
+<!-- Individual Student -->
+<div class="p-3 hover:bg-white/50 rounded-xl transition-colors cursor-pointer" id="thread-elena" onclick="switchChat('elena')">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a young woman with curly hair, academic setting, focused and intelligent expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfWdfK16ajirc3yRRx7UJ6CGkUh41m0g_Pn6j3-jWWqnTFtjy9pDH-h7Y4cglSKbdl8WPy7SenLSJSgRxQ4BaBaSqBTTlgY-sAu53z059_TpHJo7AVoGSUeiGYhhLQfNKzgdwrRjucA7S33GetvRDHo1TV-AG0aphRke26mvRgm_hPeDUfTWzzbi4hI1QT3tSxFJjZ3eX8IViiMLRkJOex1IaU6TJPzPyIT4pGX-pcKFD-eEWr0ntJEhtLFxP19ot_XhOH6tpXmK0K"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between">
+<span class="text-sm font-semibold text-on-surface">Elena Rodriguez</span>
+<span class="text-[10px] text-slate-400">Wed</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Thank you for the feedback on my paper!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Window -->
+<div class="flex-1 flex flex-col bg-white">
+<!-- Chat Header -->
+<div class="h-16 px-8 flex items-center justify-between bg-surface-container-lowest" id="chat-header">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-tertiary-fixed rounded-lg flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Discussion Board</h3>
+<p class="text-xs text-slate-400">12 faculty members active</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-low text-slate-500 transition-colors" title="Toggle Alerts">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low text-slate-500 transition-colors" title="Mute Chat">
+<span class="material-symbols-outlined">volume_off</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-low text-primary text-sm font-bold ml-4">
+<span class="material-symbols-outlined text-sm">attach_file</span>
+<span>Attach File</span>
+</button>
+</div>
+</div>
+<!-- Chat History Area -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8 bg-surface-bright" id="chat-history">
+<!-- Date Divider -->
+<div class="flex items-center gap-4">
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Today, October 24</span>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<!-- Message Received -->
+<div class="flex gap-4 max-w-2xl">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="portrait of a male professor in his late 40s, distinguished look, library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXYmm9PYPcpVfHnbhbgmPAiFTopwXRL6Hdm3z0vwoK-Or30t9fKUz3z8rL_aP4jhdeKoF3pu2uCw-HmM-UbZ7dwZC7CozV8WOTcbmCEgEtbzTVIGD1FqmO8_zU9kOpWdF_JkKhsxn020U0h1icgCSr65oJgalmOdlUSU8fyxPn_jh9TObHnzcXAhImHqVvz54sPKrTB19FpjOgulA2I8tpfcvRr1eypRdqYHEZc_mbhXjkujV2MUqdI5R7i3ptiTeDkocYlgKHNXuv"/>
+</div>
+<div>
+<div class="flex items-baseline gap-2 mb-1">
+<span class="font-bold text-on-surface text-sm">Dr. Marcus Aris</span>
+<span class="text-[10px] text-slate-400">10:02 AM</span>
+</div>
+<div class="bg-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-on-surface-variant ring-1 ring-slate-100">
+                                Good morning team. I've uploaded the new Physics 101 curriculum updates to the library. Please review the lab safety section specifically as we've added three new protocols for the upcoming semester.
+                            </div>
+</div>
+</div>
+<!-- Message Received -->
+<div class="flex gap-4 max-w-2xl">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="close-up of a smiling academic professional woman with auburn hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARlCCeE5dIer89DWG_0bgwmTl59yndGzswScIAr4WOI7Fy2p4NWzmT1B6mhngLIxrIBf23qXYEjageIqWntJe4-e7Q2xt1dXs6zSrKQQ8tx7FBd4mUqKxa69Tt1JZfHHrIcDwZXdQNiWGsDyY0dK1EAE5b8-0WY1_TD_yAs4-e4j6wRqdVjA1TN6RcGIHcegN55-HjKJEgAcb-aBRKI_m_yM1w-BsB8L1x4VdBb1ZpxG1NHT7j5Gm-rvM1H0Mo8GIh9zAXf8k9WHdn"/>
+</div>
+<div>
+<div class="flex items-baseline gap-2 mb-1">
+<span class="font-bold text-on-surface text-sm">Prof. Sarah Jenkins</span>
+<span class="text-[10px] text-slate-400">10:15 AM</span>
+</div>
+<div class="bg-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-on-surface-variant ring-1 ring-slate-100">
+                                Thanks, Marcus! Just saw them. The section on thermal dynamics looks much more comprehensive now. Benjamin Thorne was asking about these specifically yesterday.
+                            </div>
+<div class="mt-3 p-3 bg-secondary-fixed/30 rounded-lg flex items-center gap-3 max-w-xs cursor-pointer hover:bg-secondary-fixed/50 transition-all border border-secondary-fixed">
+<span class="material-symbols-outlined text-secondary">description</span>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold text-on-secondary-fixed truncate">Physics_101_Rev2.pdf</p>
+<p class="text-[10px] text-secondary">2.4 MB • PDF Document</p>
+</div>
+<span class="material-symbols-outlined text-sm text-secondary">download</span>
+</div>
+</div>
+</div>
+<!-- Message Sent (Self) -->
+<div class="flex gap-4 flex-row-reverse max-w-2xl ml-auto">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white flex-shrink-0">
+<span class="text-xs font-bold">YK</span>
+</div>
+<div class="text-right">
+<div class="flex items-baseline flex-row-reverse gap-2 mb-1">
+<span class="font-bold text-on-surface text-sm">You</span>
+<span class="text-[10px] text-slate-400">10:24 AM</span>
+</div>
+<div class="bg-primary text-white p-4 rounded-xl rounded-tr-none shadow-sm text-sm leading-relaxed text-left">
+                                Great work everyone. I'll make sure to mention the new protocols in the faculty briefing tomorrow morning. Does anyone need additional resources for the lab setup?
+                            </div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-6 bg-white">
+<div class="relative group">
+<div class="flex items-end gap-3 p-4 bg-surface-container-highest rounded-2xl transition-all focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/20 ring-1 ring-transparent">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2 resize-none max-h-32 text-on-surface" id="message-input" placeholder="Type your message to the Discussion Board..." rows="1"></textarea>
+<div class="flex gap-2 mb-1">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mood</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button class="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-primary/20 transition-all active:scale-95" onclick="sendMessage()">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="mt-2 flex items-center gap-4 px-4">
+<span class="text-[10px] text-slate-400 font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Dr. Aris is typing...
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- FAB (Suppressed on this transactional-focused messaging screen per "Shell Visibility & Relevance" mandate, but included if needed for specific dashboard actions. Here, we prioritize the input area.) -->
+<script>
+function sendMessage() {
+    const input = document.getElementById('message-input');
+    const history = document.getElementById('chat-history');
+    const messageText = input.value.trim();
+
+    if (messageText === '') return;
+
+    const now = new Date();
+    const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+    const messageHtml = `
+        <div class="flex gap-4 flex-row-reverse max-w-2xl ml-auto animate-fade-in-up">
+            <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white flex-shrink-0">
+                <span class="text-xs font-bold">YK</span>
+            </div>
+            <div class="text-right">
+                <div class="flex items-baseline flex-row-reverse gap-2 mb-1">
+                    <span class="font-bold text-on-surface text-sm">You</span>
+                    <span class="text-[10px] text-slate-400">${timeString} AM</span>
+                </div>
+                <div class="bg-primary text-white p-4 rounded-xl rounded-tr-none shadow-sm text-sm leading-relaxed text-left">
+                    ${messageText}
+                </div>
+            </div>
+        </div>
+    `;
+
+    history.insertAdjacentHTML('beforeend', messageHtml);
+    input.value = '';
+    input.rows = 1;
+    history.scrollTop = history.scrollHeight;
+}
+
+// Handle Enter key (Shift+Enter for newline)
+document.getElementById('message-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+</script><script>
+const chatData = {
+    'discussion': {
+        title: 'Discussion Board',
+        status: '12 faculty members active',
+        icon: 'groups',
+        iconBg: 'bg-tertiary-fixed',
+        iconColor: 'text-tertiary',
+        history: `
+            <div class="flex items-center gap-4">
+                <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Today, October 24</span>
+                <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+            </div>
+            <div class="flex gap-4 max-w-2xl">
+                <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXYmm9PYPcpVfHnbhbgmPAiFTopwXRL6Hdm3z0vwoK-Or30t9fKUz3z8rL_aP4jhdeKoF3pu2uCw-HmM-UbZ7dwZC7CozV8WOTcbmCEgEtbzTVIGD1FqmO8_zU9kOpWdF_JkKhsxn020U0h1icgCSr65oJgalmOdlUSU8fyxPn_jh9TObHnzcXAhImHqVvz54sPKrTB19FpjOgulA2I8tpfcvRr1eypRdqYHEZc_mbhXjkujV2MUqdI5R7i3ptiTeDkocYlgKHNXuv">
+                </div>
+                <div>
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">Dr. Marcus Aris</span>
+                        <span class="text-[10px] text-slate-400">10:02 AM</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-on-surface-variant ring-1 ring-slate-100">
+                        Good morning team. I've uploaded the new Physics 101 curriculum updates to the library. Please review the lab safety section specifically as we've added three new protocols for the upcoming semester.
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-4 max-w-2xl">
+                <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARlCCeE5dIer89DWG_0bgwmTl59yndGzswScIAr4WOI7Fy2p4NWzmT1B6mhngLIxrIBf23qXYEjageIqWntJe4-e7Q2xt1dXs6zSrKQQ8tx7FBd4mUqKxa69Tt1JZfHHrIcDwZXdQNiWGsDyY0dK1EAE5b8-0WY1_TD_yAs4-e4j6wRqdVjA1TN6RcGIHcegN55-HjKJEgAcb-aBRKI_m_yM1w-BsB8L1x4VdBb1ZpxG1NHT7j5Gm-rvM1H0Mo8GIh9zAXf8k9WHdn">
+                </div>
+                <div>
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">Prof. Sarah Jenkins</span>
+                        <span class="text-[10px] text-slate-400">10:15 AM</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-on-surface-variant ring-1 ring-slate-100">
+                        Thanks, Marcus! Just saw them. The section on thermal dynamics looks much more comprehensive now. Benjamin Thorne was asking about these specifically yesterday.
+                    </div>
+                    <div class="mt-3 p-3 bg-secondary-fixed/30 rounded-lg flex items-center gap-3 max-w-xs cursor-pointer hover:bg-secondary-fixed/50 transition-all border border-secondary-fixed">
+                        <span class="material-symbols-outlined text-secondary">description</span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-bold text-on-secondary-fixed truncate">Physics_101_Rev2.pdf</p>
+                            <p class="text-[10px] text-secondary">2.4 MB • PDF Document</p>
+                        </div>
+                        <span class="material-symbols-outlined text-sm text-secondary">download</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-4 flex-row-reverse max-w-2xl ml-auto">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white flex-shrink-0">
+                    <span class="text-xs font-bold">YK</span>
+                </div>
+                <div class="text-right">
+                    <div class="flex items-baseline flex-row-reverse gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">You</span>
+                        <span class="text-[10px] text-slate-400">10:24 AM</span>
+                    </div>
+                    <div class="bg-primary text-white p-4 rounded-xl rounded-tr-none shadow-sm text-sm leading-relaxed text-left">
+                        Great work everyone. I'll make sure to mention the new protocols in the faculty briefing tomorrow morning. Does anyone need additional resources for the lab setup?
+                    </div>
+                </div>
+            </div>`
+    },
+    'benjamin': {
+        title: 'Benjamin Thorne',
+        status: 'Last seen yesterday',
+        icon: 'person',
+        iconBg: 'bg-primary-fixed',
+        iconColor: 'text-primary',
+        history: `
+            <div class="flex items-center gap-4">
+                <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Yesterday</span>
+                <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+            </div>
+            <div class="flex gap-4 max-w-2xl">
+                <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIGP6LcfkdIoJHaWrQDuHW_lm5Kh1DlBstU_givakBQuyArQQ5gcHD57EI5jVPhifW0gNaTqcXJVDWBohZoL6ZXP89S6J0gk3dJ7wJu4G4cUbKHSo6TfJnsd0aL1E1kVzTzyPyBmrCBrkgFEO2goEejNaJ5mpPyY8aun9FukUtY8MrXsTCApqRfuVGOVVVujMa-Uqip3nviI9xBXnN8yHX34p-Hfxw5qE_azsUHNx7ycFr22-myM8CRKQcUpGNvgWEwH4FP4Xy0k7T">
+                </div>
+                <div>
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">Benjamin Thorne</span>
+                        <span class="text-[10px] text-slate-400">4:30 PM</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-on-surface-variant ring-1 ring-slate-100">
+                        Hi Professor, I have a question about the theorem we discussed in today's lecture. Specifically, how the second law of thermodynamics applies to the closed system experiment.
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-4 flex-row-reverse max-w-2xl ml-auto">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white flex-shrink-0">
+                    <span class="text-xs font-bold">YK</span>
+                </div>
+                <div class="text-right">
+                    <div class="flex items-baseline flex-row-reverse gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">You</span>
+                        <span class="text-[10px] text-slate-400">4:45 PM</span>
+                    </div>
+                    <div class="bg-primary text-white p-4 rounded-xl rounded-tr-none shadow-sm text-sm leading-relaxed text-left">
+                        That's a great question, Benjamin. If you look at the curriculum updates I just posted to the Discussion Board, there's a new section on thermal dynamics that explains this in detail. Let me know if that helps!
+                    </div>
+                </div>
+            </div>`
+    },
+    'elena': {
+        title: 'Elena Rodriguez',
+        status: 'Last seen Wednesday',
+        icon: 'person',
+        iconBg: 'bg-primary-fixed',
+        iconColor: 'text-primary',
+        history: `
+            <div class="flex items-center gap-4">
+                <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Wednesday</span>
+                <div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+            </div>
+            <div class="flex gap-4 max-w-2xl">
+                <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfWdfK16ajirc3yRRx7UJ6CGkUh41m0g_Pn6j3-jWWqnTFtjy9pDH-h7Y4cglSKbdl8WPy7SenLSJSgRxQ4BaBaSqBTTlgY-sAu53z059_TpHJo7AVoGSUeiGYhhLQfNKzgdwrRjucA7S33GetvRDHo1TV-AG0aphRke26mvRgm_hPeDUfTWzzbi4hI1QT3tSxFJjZ3eX8IViiMLRkJOex1IaU6TJPzPyIT4pGX-pcKFD-eEWr0ntJEhtLFxP19ot_XhOH6tpXmK0K">
+                </div>
+                <div>
+                    <div class="flex items-baseline gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">Elena Rodriguez</span>
+                        <span class="text-[10px] text-slate-400">11:15 AM</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-on-surface-variant ring-1 ring-slate-100">
+                        Thank you for the feedback on my paper! I'll make the suggested revisions to the methodology section tonight.
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-4 flex-row-reverse max-w-2xl ml-auto">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white flex-shrink-0">
+                    <span class="text-xs font-bold">YK</span>
+                </div>
+                <div class="text-right">
+                    <div class="flex items-baseline flex-row-reverse gap-2 mb-1">
+                        <span class="font-bold text-on-surface text-sm">You</span>
+                        <span class="text-[10px] text-slate-400">11:30 AM</span>
+                    </div>
+                    <div class="bg-primary text-white p-4 rounded-xl rounded-tl-none shadow-sm text-sm leading-relaxed text-left">
+                        You're welcome, Elena. Looking forward to reading the final version. Your analysis of the initial data sets was very insightful.
+                    </div>
+                </div>
+            </div>`
+    }
+};
+
+function switchChat(chatId) {
+    const threads = ['discussion', 'benjamin', 'elena'];
+    
+    // 1. Update Sidebar UI
+    threads.forEach(id => {
+        const el = document.getElementById('thread-' + id);
+        if (id === chatId) {
+            el.classList.add('bg-white', 'shadow-sm', 'border-l-4', 'border-primary');
+            el.classList.remove('hover:bg-white/50');
+            // Special case for the Discussion Board's text color
+            const title = el.querySelector('span.text-sm');
+            if(title) title.classList.add('text-primary');
+        } else {
+            el.classList.remove('bg-white', 'shadow-sm', 'border-l-4', 'border-primary');
+            el.classList.add('hover:bg-white/50');
+             const title = el.querySelector('span.text-sm');
+            if(title) title.classList.remove('text-primary');
+        }
+    });
+
+    const data = chatData[chatId];
+
+    // 2. Update Header
+    const header = document.getElementById('chat-header');
+    header.querySelector('h3').textContent = data.title;
+    header.querySelector('p').textContent = data.status;
+    
+    const iconContainer = header.querySelector('.w-10.h-10');
+    iconContainer.className = `w-10 h-10 ${data.iconBg} rounded-lg flex items-center justify-center ${data.iconColor}`;
+    iconContainer.querySelector('.material-symbols-outlined').textContent = data.icon;
+
+    // 3. Update History
+    const history = document.getElementById('chat-history');
+    history.innerHTML = data.history;
+    history.scrollTop = 0;
+    
+    // 4. Update Input Placeholder
+    document.getElementById('message-input').placeholder = `Type your message to ${data.title}...`;
+}
+</script></body></html>

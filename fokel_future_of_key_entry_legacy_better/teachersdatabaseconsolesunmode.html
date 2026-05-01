@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScholarDB - Teacher Database Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#001945",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c4c6d3",
+                    "surface-bright": "#f8f9ff",
+                    "primary": "#002155",
+                    "tertiary-container": "#00422b",
+                    "surface-dim": "#cbdbf5",
+                    "surface-tint": "#375ca8",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-container": "#354585",
+                    "on-secondary-fixed": "#001354",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline": "#747782",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "tertiary": "#002a1a",
+                    "on-tertiary-container": "#10b981",
+                    "on-secondary-fixed-variant": "#334282",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#b8c4ff",
+                    "on-background": "#0b1c30",
+                    "on-primary-container": "#7fa1f2",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#003580",
+                    "surface-container": "#e5eeff",
+                    "surface": "#f8f9ff",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "on-surface": "#0b1c30",
+                    "background": "#f8f9ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "secondary-container": "#a6b5fd",
+                    "on-primary-fixed-variant": "#1a438e",
+                    "inverse-primary": "#b0c6ff",
+                    "on-surface-variant": "#434651",
+                    "secondary-fixed": "#dde1ff",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-low": "#eff4ff",
+                    "inverse-surface": "#213145",
+                    "secondary": "#4b5a9c",
+                    "primary-fixed": "#d9e2ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-padding": "2rem",
+                    "element-padding-md": "1.25rem",
+                    "grid-gutter": "1rem",
+                    "element-padding-sm": "0.75rem",
+                    "sidebar-width": "240px",
+                    "stack-gap": "1.5rem"
+            },
+            "fontFamily": {
+                    "body-base": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "data-tabular": ["Inter"]
+            },
+            "fontSize": {
+                    "body-base": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-tabular": ["13px", {"lineHeight": "1.5", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 flex items-center justify-between px-6 h-16 w-full bg-white border-b border-slate-200 shadow-sm">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-blue-900">ScholarDB</span>
+<div class="hidden md:flex gap-6 items-center">
+<span class="text-blue-700 font-semibold border-b-2 border-blue-700 h-16 flex items-center px-1 cursor-pointer">Console</span>
+<span class="text-slate-600 hover:bg-slate-50 transition-colors h-16 flex items-center px-1 cursor-pointer">Audit</span>
+<span class="text-slate-600 hover:bg-slate-50 transition-colors h-16 flex items-center px-1 cursor-pointer">Security</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-50 rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-50 rounded-full transition-colors">history</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-50 rounded-full transition-colors">help</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden border border-slate-300">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A professional studio portrait of a university administrator in a crisp navy blazer, looking directly into the camera with a helpful expression. The lighting is bright and clinical, typical of a modern office environment. The background is a soft, blurred academic office with books and a computer screen. The image follows a high-key, professional light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1K4eOqlRwhaaJrNLPdJTm8t709sXMOwPO4WJkJhAqBau_xyfa9k-J1aTHTvm8L6GfBc1eSFKKHf7p2u9unMC9NESi5khCXIv-4aGuk1Ljw0RiGoewWspNvKtCbK9pzb7AiZEYNbEM0-vQYcnciFJ03kzR1wcaDM-vrhHpCyllAxhprJzyXpbSAoWv1AoZNSJaQDJ1fCeTn84SlN15Pzquu_j-t7L9tzzbbvNFrJECH_hA7oka9-PWENpvuhQAslWPhHKoRFAmea8"/>
+</div>
+</div>
+</nav>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 h-screen w-64 border-r border-slate-200 bg-slate-50 transition-all duration-200 ease-in-out z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="h-10 w-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-slate-900 leading-none">Management</h2>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">Academic Env</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm tracking-wide">Dashboards</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white text-blue-700 border-r-4 border-blue-700 shadow-sm transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-medium text-sm tracking-wide">Databases</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="font-medium text-sm tracking-wide">Permissions</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium text-sm tracking-wide">Settings</span>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200">
+<button class="w-full flex items-center justify-center gap-2 bg-blue-900 text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Export Audit Log
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 p-8 min-h-screen">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Section 1: Configure & Deploy -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-900">add_moderator</span>
+<h2 class="font-headline-md text-headline-md text-primary">Configure &amp; Deploy New Database</h2>
+</div>
+<div class="p-6">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-1">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">DATABASE TITLE</label>
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg text-body-base focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g. Quantum Physics Archive" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">NUMBER OF FIELDS</label>
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg text-body-base focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="number" value="12"/>
+</div>
+<div class="col-span-1">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">DATA TYPE</label>
+<select class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg text-body-base focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+<option>Relational (SQL)</option>
+<option>Document (NoSQL)</option>
+<option>Graph Database</option>
+<option>Time-Series</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">INSTRUCTIONS FOR STUDENTS</label>
+<textarea class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg text-body-base focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" placeholder="Enter specific guidelines for data entry, validation rules, and relational constraints..." rows="4"></textarea>
+</div>
+<div class="flex justify-end pt-2">
+<button class="px-6 py-2.5 bg-primary text-white rounded-lg font-semibold hover:bg-primary-container transition-colors flex items-center gap-2 shadow-md" type="button">
+<span class="material-symbols-outlined">rocket_launch</span>
+                                    Initialize Cluster
+                                </button>
+</div>
+</form>
+</div>
+</section>
+<!-- Section 2: Active Repositories -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">inventory_2</span>
+<h2 class="font-headline-md text-headline-md text-primary">Active Repositories</h2>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-semibold text-slate-500">SORT: HEALTH %</span>
+<span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-semibold text-slate-500">FILTER: ONLINE</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl border border-slate-200 hover:border-blue-300 transition-all group cursor-pointer shadow-sm">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="h-10 w-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Online
+                                    </div>
+</div>
+<h3 class="font-bold text-slate-900 mb-1">Global Trade Index</h3>
+<p class="text-xs text-slate-500 font-medium mb-4">Relational Cluster • v2.4.1</p>
+<div class="space-y-3 pt-4 border-t border-slate-100">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-400">System Health</span>
+<span class="text-xs font-bold text-blue-900">98.2%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-600 h-full w-[98%]"></div>
+</div>
+<div class="flex justify-between items-center pt-1">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="text-xs font-bold">1,240 Users</span>
+</div>
+<span class="text-[10px] font-medium text-slate-400">LATENCY: 42ms</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl border border-slate-200 hover:border-blue-300 transition-all group cursor-pointer shadow-sm">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="h-10 w-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Online
+                                    </div>
+</div>
+<h3 class="font-bold text-slate-900 mb-1">Neural Topology Map</h3>
+<p class="text-xs text-slate-500 font-medium mb-4">Graph Cluster • v1.0.8</p>
+<div class="space-y-3 pt-4 border-t border-slate-100">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-400">System Health</span>
+<span class="text-xs font-bold text-blue-900">92.7%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-600 h-full w-[92%]"></div>
+</div>
+<div class="flex justify-between items-center pt-1">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="text-xs font-bold">842 Users</span>
+</div>
+<span class="text-[10px] font-medium text-slate-400">LATENCY: 118ms</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-xl border border-red-100 hover:border-red-300 transition-all group cursor-pointer shadow-sm">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="h-10 w-10 bg-red-50 rounded-lg flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-red-50 text-red-700 rounded text-[10px] font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                                        Error
+                                    </div>
+</div>
+<h3 class="font-bold text-slate-900 mb-1">Linguistic Stem Registry</h3>
+<p class="text-xs text-slate-500 font-medium mb-4">Document Cluster • v3.2.0</p>
+<div class="space-y-3 pt-4 border-t border-slate-100">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-400">System Health</span>
+<span class="text-xs font-bold text-red-600">44.1%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[44%]"></div>
+</div>
+<div class="flex justify-between items-center pt-1">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="text-xs font-bold">0 Users</span>
+</div>
+<span class="text-[10px] font-medium text-red-500 font-bold uppercase">Critical Failure</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white rounded-xl border border-slate-200 hover:border-blue-300 transition-all group cursor-pointer shadow-sm">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="h-10 w-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">history_toggle_off</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Online
+                                    </div>
+</div>
+<h3 class="font-bold text-slate-900 mb-1">Celestial Object Telemetry</h3>
+<p class="text-xs text-slate-500 font-medium mb-4">Time-Series Cluster • v0.9.4</p>
+<div class="space-y-3 pt-4 border-t border-slate-100">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-400">System Health</span>
+<span class="text-xs font-bold text-blue-900">99.9%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-600 h-full w-[99%]"></div>
+</div>
+<div class="flex justify-between items-center pt-1">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="text-xs font-bold">2,115 Users</span>
+</div>
+<span class="text-[10px] font-medium text-slate-400">LATENCY: 12ms</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Status Summary Banner -->
+<div class="bg-blue-900 text-white rounded-xl p-8 flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-2xl font-bold mb-2">Academic Network Summary</h2>
+<p class="text-blue-200 text-sm max-w-md">Currently monitoring 4 active database clusters across 12 institutional departments. System latency is within optimal range for administrative access.</p>
+</div>
+<div class="flex gap-8 mt-6 md:mt-0 relative z-10">
+<div class="text-center">
+<p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-1">Avg Health</p>
+<p class="text-3xl font-black">83.7%</p>
+</div>
+<div class="text-center">
+<p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-1">Total Users</p>
+<p class="text-3xl font-black">4,197</p>
+</div>
+<div class="text-center">
+<p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-1">Uptime</p>
+<p class="text-3xl font-black">99.8</p>
+</div>
+</div>
+<div class="absolute right-0 top-0 w-64 h-full opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[180px] -rotate-12 translate-x-12 translate-y-4">query_stats</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

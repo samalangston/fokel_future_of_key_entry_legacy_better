@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScholarDB | Management Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#001945",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6d3",
+                        "surface-bright": "#f8f9ff",
+                        "primary": "#002155",
+                        "tertiary-container": "#00422b",
+                        "surface-dim": "#cbdbf5",
+                        "surface-tint": "#375ca8",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary-container": "#354585",
+                        "on-secondary-fixed": "#001354",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container-highest": "#d3e4fe",
+                        "outline": "#747782",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary": "#002a1a",
+                        "on-tertiary-container": "#10b981",
+                        "on-secondary-fixed-variant": "#334282",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#b8c4ff",
+                        "on-background": "#0b1c30",
+                        "on-primary-container": "#7fa1f2",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#003580",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "on-surface": "#0b1c30",
+                        "background": "#f8f9ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "secondary-container": "#a6b5fd",
+                        "on-primary-fixed-variant": "#1a438e",
+                        "inverse-primary": "#b0c6ff",
+                        "on-surface-variant": "#434651",
+                        "secondary-fixed": "#dde1ff",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-surface": "#213145",
+                        "secondary": "#4b5a9c",
+                        "primary-fixed": "#d9e2ff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "inverse-on-surface": "#eaf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "2rem",
+                        "element-padding-md": "1.25rem",
+                        "grid-gutter": "1rem",
+                        "element-padding-sm": "0.75rem",
+                        "sidebar-width": "240px",
+                        "stack-gap": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "data-tabular": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-base": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "data-tabular": ["13px", {"lineHeight": "1.5", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #F8FAFC;
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base text-on-surface">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 h-16 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-blue-900 dark:text-white">ScholarDB</span>
+<nav class="hidden md:flex gap-6 font-sans antialiased text-sm font-medium">
+<a class="text-blue-700 dark:text-blue-300 font-semibold border-b-2 border-blue-700 cursor-pointer active:opacity-80 transition-opacity h-16 flex items-center">Databases</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:opacity-80 transition-opacity h-16 flex items-center px-2">Analytics</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:opacity-80 transition-opacity h-16 flex items-center px-2">Security</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-slate-100 border-none rounded-lg py-1.5 px-4 text-xs w-64 focus:ring-2 focus:ring-primary-container" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-100 rounded-full" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-100 rounded-full" data-icon="history">history</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-100 rounded-full" data-icon="help">help</span>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Administrator Profile" class="h-full w-full object-cover" data-alt="A professional headshot of a university administrator in a modern office. He is wearing a crisp white shirt and navy blazer, looking directly at the camera with a confident and helpful expression. The background is softly blurred, showing books and a clean, minimalist academic setting with natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqkOMwOSySFzKtQ7pF3U9uKLxEc4h-iAWCiaFZo61y9-b7pyByDoywxq45WWDWYHqpHGd5IwASIkZMMxvT6NlF4kZDfS0XD6H3JrT0bukWwFhY4n6x-tEosuu-bYELjvqdZ9HieP2yIlcSn21PXCFtum70HHdCEe1yXQaluQG6sf2JDET54gWKwjvoKfAiYPC8Q_moy5Ti14Nef_2ktQd4E9VBwle5FqDxE2jL0r1eG5LwH92LS68R0wj1_MceVPEdqwiRTQfeKuI"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 h-screen w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 z-40 transition-all duration-200 ease-in-out">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-icon="school">school</span>
+</div>
+<span class="text-lg font-black text-slate-900 dark:text-slate-100">Scholar Admin</span>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Academic Environment</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-sm tracking-wide font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-200 ease-in-out rounded-lg">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboards
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-sm tracking-wide font-medium bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 border-r-4 border-blue-700 shadow-sm transition-all duration-200 ease-in-out rounded-lg">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+                    Databases
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-sm tracking-wide font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-200 ease-in-out rounded-lg">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+                    Permissions
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-sm tracking-wide font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-200 ease-in-out rounded-lg">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="p-6">
+<button class="w-full py-2 px-4 bg-slate-900 text-white text-xs font-bold rounded hover:bg-slate-800 transition-colors uppercase tracking-wider">
+                    Export Audit Log
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 p-8">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-1">Database Configuration</h1>
+<p class="text-slate-500 font-medium">Create and manage institutional student records with granular permission logic.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 bg-white border border-slate-200 text-slate-700 font-semibold rounded hover:bg-slate-50 transition-all">Save as Draft</button>
+<button class="px-6 py-2.5 bg-primary text-white font-semibold rounded hover:bg-blue-900 shadow-lg shadow-primary/10 transition-all">Create Database</button>
+</div>
+</div>
+<!-- Bento Layout Top: Summary & Create Form -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Create New Database Form -->
+<div class="col-span-12 lg:col-span-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+<div class="flex items-center gap-2 mb-6 border-b border-slate-100 pb-4">
+<span class="material-symbols-outlined text-primary" data-icon="add_box">add_box</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Configuration Details</h2>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-slate-500 uppercase">Database Title</label>
+<input class="w-full border-slate-200 rounded-lg p-3 text-sm focus:ring-primary focus:border-primary" placeholder="e.g. Spring 2024 Enrollment" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-slate-500 uppercase">Number of Fields</label>
+<div class="flex items-center gap-3">
+<input class="w-full border-slate-200 rounded-lg p-3 text-sm focus:ring-primary focus:border-primary" type="number" value="12"/>
+<span class="text-xs text-slate-400 whitespace-nowrap">Max 128</span>
+</div>
+</div>
+<div class="col-span-2 space-y-2">
+<label class="text-label-sm font-label-sm text-slate-500 uppercase">Storage Cluster</label>
+<select class="w-full border-slate-200 rounded-lg p-3 text-sm focus:ring-primary focus:border-primary">
+<option>Academic East-1 (Primary)</option>
+<option>Academic Central-2 (Encrypted)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Summary Card -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-primary text-white p-6 rounded-xl shadow-lg shadow-primary/20 relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-6">
+<span class="text-label-sm font-label-sm opacity-70 uppercase tracking-widest">System Health</span>
+<span class="flex items-center gap-1 text-[10px] bg-white/20 px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> ONLINE
+                                    </span>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between border-b border-white/10 pb-2">
+<span class="text-sm opacity-80">Active Users</span>
+<span class="font-bold">1,482</span>
+</div>
+<div class="flex justify-between border-b border-white/10 pb-2">
+<span class="text-sm opacity-80">Encryption</span>
+<span class="font-bold">AES-256</span>
+</div>
+<div class="flex justify-between">
+<span class="text-sm opacity-80">Latency</span>
+<span class="font-bold">14ms</span>
+</div>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="verified_user">verified_user</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Permissions Control Section -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="lock_person">lock_person</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Permissions Control</h2>
+</div>
+<div class="flex gap-2">
+<button class="text-xs font-bold text-primary px-3 py-1.5 hover:bg-primary/5 rounded transition-colors uppercase tracking-wider">Add User Group</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50 border-b border-slate-100">
+<th class="px-6 py-3 text-label-sm font-label-sm text-slate-500 uppercase">User Identity</th>
+<th class="px-6 py-3 text-label-sm font-label-sm text-slate-500 uppercase">System Role</th>
+<th class="px-6 py-3 text-label-sm font-label-sm text-slate-500 uppercase text-center">View</th>
+<th class="px-6 py-3 text-label-sm font-label-sm text-slate-500 uppercase text-center">Edit</th>
+<th class="px-6 py-3 text-label-sm font-label-sm text-slate-500 uppercase text-center">Delete</th>
+<th class="px-6 py-3 text-label-sm font-label-sm text-slate-500 uppercase text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Admin Row -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">TA</div>
+<div>
+<div class="font-semibold text-slate-900">Dr. Sarah Jenkins</div>
+<div class="text-[11px] text-slate-400">s.jenkins@scholar-db.edu</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-primary text-white text-[10px] font-bold rounded uppercase tracking-tighter">Teacher Admin</span>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 bg-slate-100" disabled="" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 bg-slate-100" disabled="" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4 bg-slate-100" disabled="" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[10px] font-bold text-green-600">AUTHENTICATED</span>
+</td>
+</tr>
+<!-- Regular Row -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs">MR</div>
+<div>
+<div class="font-semibold text-slate-900">Mark Richards</div>
+<div class="text-[11px] text-slate-400">m.richards@registrar.edu</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded uppercase tracking-tighter">Registrar Staff</span>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[10px] font-bold text-slate-400">PENDING INVITE</span>
+</td>
+</tr>
+<!-- Regular Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs">AL</div>
+<div>
+<div class="font-semibold text-slate-900">Alice Lowery</div>
+<div class="text-[11px] text-slate-400">a.lowery@academic.edu</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded uppercase tracking-tighter">Support Assistant</span>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[10px] font-bold text-green-600">AUTHENTICATED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-100">
+<p class="text-[11px] text-slate-500 italic">Audit Log: Every change to permissions is recorded under institutional compliance policy GDPR-EDU-2024.</p>
+</div>
+</section>
+<!-- Help & Documentation Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container p-5 rounded-lg border border-outline-variant flex items-start gap-4">
+<div class="p-2 bg-white rounded shadow-sm text-primary">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-primary">Documentation</h4>
+<p class="text-xs text-slate-600 mt-1">Review the ScholarDB schema standards for field naming.</p>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg border border-outline-variant flex items-start gap-4">
+<div class="p-2 bg-white rounded shadow-sm text-primary">
+<span class="material-symbols-outlined" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-primary">Live Sync</h4>
+<p class="text-xs text-slate-600 mt-1">Configuration changes propagate to all nodes in ~140ms.</p>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg border border-outline-variant flex items-start gap-4">
+<div class="p-2 bg-white rounded shadow-sm text-primary">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-primary">IT Support</h4>
+<p class="text-xs text-slate-600 mt-1">Need advanced permissions? Contact the SysAdmin desk.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

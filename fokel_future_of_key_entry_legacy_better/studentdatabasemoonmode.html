@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DB_CONSOLE_V1 - Database Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#001e2c",
+                        "on-tertiary": "#283044",
+                        "outline-variant": "#3e484f",
+                        "on-secondary": "#263143",
+                        "primary": "#8ed5ff",
+                        "surface-bright": "#2c3a4c",
+                        "tertiary-container": "#a9b1ca",
+                        "surface-dim": "#051424",
+                        "surface-tint": "#7bd0ff",
+                        "on-secondary-container": "#aeb9d0",
+                        "surface-container-high": "#1c2b3c",
+                        "surface-variant": "#273647",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-container-highest": "#273647",
+                        "outline": "#87929a",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "tertiary": "#c5cce6",
+                        "on-tertiary-container": "#3c4459",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "error": "#ffb4ab",
+                        "on-primary": "#00354a",
+                        "on-background": "#d4e4fa",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-primary-container": "#004965",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#122131",
+                        "surface-container-lowest": "#010f1f",
+                        "primary-container": "#38bdf8",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "on-surface": "#d4e4fa",
+                        "background": "#051424",
+                        "surface": "#051424",
+                        "tertiary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#004c69",
+                        "secondary-container": "#3e495d",
+                        "inverse-primary": "#00668a",
+                        "on-surface-variant": "#bdc8d1",
+                        "surface-container-low": "#0d1c2d",
+                        "inverse-surface": "#d4e4fa",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-tertiary-fixed": "#131b2e",
+                        "secondary": "#bcc7de",
+                        "primary-fixed": "#c4e7ff",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "inverse-on-surface": "#233143",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "unit": "4px",
+                        "margin": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"],
+                        "mono-data": ["monospace"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "mono-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #051424;
+            color: #d4e4fa;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d1c2d;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-base overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-slate-950 dark:bg-slate-950 text-sky-400 dark:text-sky-400 font-sans tracking-tight text-sm font-medium Inter docked full-width top-0 z-50 border-b border-slate-800 flex justify-between items-center w-full px-6 h-14">
+<div class="flex items-center gap-8">
+<div class="text-lg font-black tracking-widest text-sky-400 uppercase">DB_CONSOLE_V1</div>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="bg-slate-900 border border-slate-800 rounded-lg pl-10 pr-4 py-1.5 text-xs focus:outline-none focus:border-sky-400 w-64 transition-all" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-slate-900 hover:text-sky-300 transition-all duration-150 ease-in-out rounded-lg">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-slate-900 hover:text-sky-300 transition-all duration-150 ease-in-out rounded-lg">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-800 border border-slate-700 overflow-hidden ml-2">
+<img alt="Admin User Profile" class="h-full w-full object-cover" data-alt="A professional headshot of a software administrator in a dark, high-tech office setting. The lighting is low-key with subtle blue rim lighting reflecting off the glass partitions in the background. The aesthetic is clean, corporate, and modern, aligning with a high-density database management environment. The man has a focused expression, conveying systemic reliability and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7zOmZ4NaUje8lGin5YFmMtysRaz_9a_VCsmqAis9ODNOrIZ-S7cbT-hVx1PTBXX3gOC1K81Icwa4lhs9AZOFqsNmWbNROxtTTtzPMX6MKYfY3bfJmdLqyJhNFHuPOL4RSeErcKZosAWuaqiEDT4k5zEASfbNSAc3Jn3Im8sEvbQbWyW_eqOCMeqGGM9zjCvVJEAf4DvAjd5h3H6XU8ZaqxSVzTka-_vOoJJEPPkQ82Xs3a3LkgbTZUx6Emg790JloHmaj9ngBPhg"/>
+</div>
+</div>
+</header>
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-slate-900 dark:bg-slate-900 text-sky-400 dark:text-sky-400 font-sans text-xs font-semibold uppercase tracking-widest Inter h-screen w-60 fixed left-0 top-0 border-r border-slate-800 flex flex-col h-full pt-20 z-40">
+<div class="px-6 mb-8">
+<div class="text-sky-400 font-bold mb-1">NAVIGATION</div>
+<div class="text-[10px] text-slate-500 tracking-normal normal-case font-medium">Management Console</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-slate-200 transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Student Overviews</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-slate-800 text-sky-400 border-r-2 border-sky-400 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span>Database Setups</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-slate-200 transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>System Status</span>
+</a>
+</nav>
+<div class="mt-auto p-6 border-t border-slate-800">
+<div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
+<div class="text-[10px] text-slate-400 mb-2">QUICK STATS</div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-slate-500 normal-case font-medium">Nodes</span>
+<span class="text-sky-400 font-mono">12/15</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full">
+<div class="bg-sky-400 h-1 rounded-full w-[80%]"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-60 pt-14 overflow-y-auto custom-scrollbar bg-surface-container-lowest">
+<div class="max-w-[1200px] mx-auto p-8">
+<!-- Page Header -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Database Setup</h1>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-xl">Configure your environment parameters and assign collaborator permissions for the new project instance.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-transparent border border-outline-variant text-on-surface hover:bg-surface-variant transition-colors rounded-lg font-medium text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+                            Save Draft
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Form Section Left -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Core Configuration Card -->
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="settings_input_component">settings_input_component</span>
+<h3 class="font-headline-md text-body-base font-bold text-on-surface">Instance Attributes</h3>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">DATABASE TITLE</label>
+<input class="w-full bg-background border border-outline-variant focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface rounded-lg px-4 py-2.5 font-mono-data text-mono-data outline-none transition-all" type="text" value="STUDENT_RECORD_SYSTEM_V4"/>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">FIELD COUNT</label>
+<div class="flex items-center bg-background border border-outline-variant rounded-lg overflow-hidden group focus-within:border-primary-container">
+<button class="px-4 py-2.5 text-slate-400 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<input class="flex-1 bg-transparent border-none text-center font-mono-data text-on-surface focus:ring-0 appearance-none" type="number" value="12"/>
+<button class="px-4 py-2.5 text-slate-400 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">STORAGE QUOTA</label>
+<select class="w-full bg-background border border-outline-variant text-on-surface rounded-lg px-4 py-2.5 font-body-base outline-none focus:border-primary-container transition-all">
+<option>512 MB (Standard)</option>
+<option>1 GB (Extended)</option>
+<option>5 GB (Premium)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- Collaborators Section -->
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="group">group</span>
+<h3 class="font-headline-md text-body-base font-bold text-on-surface">Collaborators</h3>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="bg-background border border-outline-variant rounded-lg pl-9 pr-4 py-1.5 text-xs focus:outline-none focus:border-primary-container w-48" placeholder="Search users..." type="text"/>
+</div>
+</div>
+<div class="space-y-3">
+<!-- Collaborator Item 1 -->
+<div class="flex items-center justify-between p-4 bg-background border border-outline-variant rounded-lg group hover:border-primary-container/30 transition-all">
+<div class="flex items-center gap-4">
+<img class="h-10 w-10 rounded-full object-cover" data-alt="A portrait of a female student collaborator with a cheerful expression in a brightly lit modern study space. The image follows a high-density tech aesthetic with clean lines and soft focus on the library background. Warm lighting creates a friendly and productive atmosphere, while the color palette maintains deep slate and subtle sky blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAnC3CSQiFE1Wcla7xcxeS9AVgAvlkeqY8KhJHBaGaSp5tLyYbhmIIsumrZMHC5nznjqbhWZU0kULinMNJZYMHWYygLb84xeYQnUHyN9HhMTzT4j31_lJj-skcVBRla-hwChsXu8HARGixSNL9ZugfSDrkEyeOoSDBApPNkTimTE3uAshGxyYXIA3YA7Qhnsxebjrqlmta5D4xh439feMX45zZ6vYvWJHQam25hUWdq72IWmc8qwphJ02Fcb7A1r52eOMLpkX9Ycg"/>
+<div>
+<div class="font-body-base font-bold text-on-surface">Sarah Jenkins</div>
+<div class="text-[11px] text-on-surface-variant">Front-end Developer</div>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-on-surface-variant font-label-caps mb-1">WRITE ACCESS</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Collaborator Item 2 -->
+<div class="flex items-center justify-between p-4 bg-background border border-outline-variant rounded-lg group hover:border-primary-container/30 transition-all">
+<div class="flex items-center gap-4">
+<img class="h-10 w-10 rounded-full object-cover" data-alt="A portrait of a male student technician in a tech lab setting. He is wearing headphones and looks professional and focused. The environment features soft tech-oriented lighting with cyan and slate tones, consistent with the architectural precision of a database management system UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPlBONqlWX-T64B4tm0ZW4g14C0uIl9gvO3FDs4Dp2JZLRV_Auc_B0stvB-zWlDNMQ8YJYR6fUA-SnpBF3HBl9CKYMqrkv4cwKZxC7f05q8EUeCp4_831E_gdUlRUw2Ef57TO1NL6uqMUgqe0WLMm_R7g-ZE6cioQVGV3TbmhpoGRPd0GxtG4lCpabX3fc7nqWiQ0E-02r7cJh_g8ER6KHtlw2F4jjCV_ET1_-srkaF81ozrvuJ6_kl49BEI2jFhP54japgsPM0BM"/>
+<div>
+<div class="font-body-base font-bold text-on-surface">Marcus Thorne</div>
+<div class="text-[11px] text-on-surface-variant">Data Analyst</div>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-on-surface-variant font-label-caps mb-1">WRITE ACCESS</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Add Button -->
+<button class="w-full py-3 border border-dashed border-outline-variant rounded-lg text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center gap-2 text-sm font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                                    Add Collaborator
+                                </button>
+</div>
+</div>
+</div>
+<!-- Sidebar Content Right -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Permissions Card -->
+<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-5 border-b border-outline-variant">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">PERMISSIONS SUMMARY</h3>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-12 w-12 rounded-lg bg-primary-container/20 flex items-center justify-center border border-primary-container/40">
+<span class="material-symbols-outlined text-primary-container" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<div class="text-[10px] text-on-surface-variant font-label-caps uppercase">System Administrator</div>
+<div class="font-headline-md text-body-base font-bold text-on-surface">Prof. Anderson</div>
+</div>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+<div>
+<div class="text-sm font-bold text-on-surface">Full Access</div>
+<div class="text-xs text-on-surface-variant">Complete control over schema and row data.</div>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+<div>
+<div class="text-sm font-bold text-on-surface">Real-time Sync</div>
+<div class="text-xs text-on-surface-variant">Automated propagation across cluster nodes.</div>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+<div>
+<div class="text-sm font-bold text-on-surface">Audit Logs</div>
+<div class="text-xs text-on-surface-variant">Tracking and storage of all instance transactions.</div>
+</div>
+</li>
+<li class="flex items-start gap-3 opacity-40">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<div>
+<div class="text-sm font-bold text-on-surface">API Gateway</div>
+<div class="text-xs text-on-surface-variant">External endpoint generation (Disabled).</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="p-5 bg-surface-variant/30 flex items-center justify-between">
+<span class="text-xs text-on-surface-variant">Security Level: High</span>
+<span class="flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+</div>
+</div>
+<!-- System Status Micro-card -->
+<div class="bg-surface-container border border-outline-variant p-5 rounded-xl">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4">DEPLOYMENT STATUS</h3>
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12">
+<svg class="w-12 h-12 transform -rotate-90">
+<circle class="text-slate-800" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary-container" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="31.4" stroke-width="4"></circle>
+</svg>
+<span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold">75%</span>
+</div>
+<div>
+<div class="text-sm font-bold text-on-surface">Ready to Launch</div>
+<div class="text-xs text-on-surface-variant">3 pending validation checks.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Action Area -->
+<div class="mt-12 py-8 border-t border-outline-variant flex justify-end">
+<button class="px-8 py-4 bg-primary-container text-on-primary-fixed font-bold rounded-lg flex items-center gap-3 hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-primary-container/10">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                        Create Database
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>
