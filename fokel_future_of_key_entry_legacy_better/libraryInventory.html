@@ -1,0 +1,391 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Library Inventory | Fokel/Database/library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d3e4fe",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-fixed": "#00174b",
+                    "surface-bright": "#f7f9fb",
+                    "on-secondary-container": "#54647a",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-container": "#eeefff",
+                    "on-error": "#ffffff",
+                    "tertiary": "#4d556b",
+                    "on-tertiary-container": "#eef0ff",
+                    "secondary-container": "#d0e1fb",
+                    "primary-container": "#2563eb",
+                    "outline": "#737686",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#dae2fd",
+                    "surface-container": "#eceef0",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "inverse-primary": "#b4c5ff",
+                    "primary": "#004ac6",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-primary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#131b2e",
+                    "on-surface": "#191c1e",
+                    "primary-fixed": "#dbe1ff",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-background": "#191c1e",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#3f465c",
+                    "surface-tint": "#0053db",
+                    "secondary": "#505f76",
+                    "tertiary-fixed-dim": "#bec6e0",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "tertiary-container": "#656d84",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#434655"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin": "2rem",
+                    "xs": "0.25rem",
+                    "xl": "2rem",
+                    "sm": "0.5rem",
+                    "md": "1rem",
+                    "gutter": "1.5rem",
+                    "unit": "4px",
+                    "lg": "1.5rem"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "h2": ["Inter"],
+                    "metadata": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "metadata": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md flex h-screen overflow-hidden">
+<!-- Left Side Navigation (SideNavBar Anchor) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-inverse-surface dark:bg-black flex flex-col p-md gap-sm z-30 shadow-sm">
+<div class="mb-xl px-sm">
+<h1 class="font-h3 text-h3 text-surface-container-lowest">Fokel/Database</h1>
+<p class="text-outline-variant font-metadata">Production Cluster</p>
+</div>
+<nav class="flex-1 flex flex-col gap-xs">
+<div class="group flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-bold cursor-pointer transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">database</span>
+<span class="font-body-md">Database Schema</span>
+</div>
+<div class="group flex items-center gap-md px-md py-sm text-outline-variant hover:text-surface-bright hover:bg-surface-variant/10 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">rule</span>
+<span class="font-body-md">Validation Rules</span>
+</div>
+<div class="group flex items-center gap-md px-md py-sm text-outline-variant hover:text-surface-bright hover:bg-surface-variant/10 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">lock</span>
+<span class="font-body-md">Access Control</span>
+</div>
+<div class="group flex items-center gap-md px-md py-sm text-outline-variant hover:text-surface-bright hover:bg-surface-variant/10 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-body-md">Dashboard</span>
+</div>
+</nav>
+<div class="mt-auto border-t border-outline/20 pt-md flex flex-col gap-xs">
+<button class="w-full bg-primary-container text-on-primary-container py-sm rounded-lg font-bold text-body-md mb-md hover:opacity-90 transition-opacity">
+                Deploy Changes
+            </button>
+<div class="group flex items-center gap-md px-md py-sm text-outline-variant hover:text-surface-bright hover:bg-surface-variant/10 transition-all cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</div>
+<div class="group flex items-center gap-md px-md py-sm text-outline-variant hover:text-surface-bright hover:bg-surface-variant/10 transition-all cursor-pointer">
+<span class="material-symbols-outlined">contact_support</span>
+<a class="font-body-md"herf="loginwithtoggle.html">Log Out</a> <!--needs to be buttons that works and interconnect -->
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col overflow-hidden">
+<!-- Top Navigation Bar (TopNavBar Anchor) -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant flex justify-between items-center px-lg py-md w-full z-20">
+<div class="flex items-center gap-lg">
+<div class="font-h2 text-h2 font-black text-primary dark:text-primary-fixed">Library Inventory</div>
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-xs bg-surface-container-low border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-body-md transition-all" placeholder="Search entries..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm items-center pr-lg border-r border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-xs rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-xs rounded-full transition-colors">help</span>
+</div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low px-sm py-xs rounded-lg transition-colors">
+<div class="text-right">
+<p class="text-primary dark:text-primary-fixed font-bold text-body-md">John Doe</p>
+<p class="text-outline text-metadata">May 04, 2026</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">
+                        JD <!--this needs to connect to profile-->
+                    </div>
+</div>
+</div>
+</header>
+<!-- Tool & Filter Toolbar -->
+<section class="bg-surface px-lg py-md border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface-variant font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+                    FILTERS
+                </button>
+<div class="h-6 w-px bg-outline-variant mx-xs"></div>
+<div class="flex items-center gap-xs text-on-surface-variant px-sm py-xs bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="text-metadata font-medium">Year: 2000-2024</span>
+<span class="material-symbols-outlined text-[16px]">close</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant px-sm py-xs bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="text-metadata font-medium">Genre: Science Fiction</span>
+<span class="material-symbols-outlined text-[16px]">close</span>
+</div>
+<button class="text-primary text-metadata font-semibold ml-xs hover:underline transition-all">Clear all</button>
+</div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary rounded-lg font-bold text-label-md transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                    ADD NEW BOOK <!-- this needs to work and link to the add page the addingrecordtodatabase-->
+                </button>
+<button class="p-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</section>
+<!-- Table Container this is were we need to connect to supabase to edit the table but needs to show on screen without having to go directly to supabase-->
+<div class="flex-1 overflow-auto bg-surface p-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
+<table class="w-full text-left border-collapse table-fixed">
+<thead class="sticky top-0 bg-surface-container-low z-10">
+<tr class="border-b border-outline-variant">
+<th class="w-12 px-md py-sm text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+</th>
+<th class="px-md py-sm text-on-surface-variant font-label-md uppercase tracking-wider cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+                                    Title <span class="material-symbols-outlined text-outline">unfold_more</span>
+</div>
+</th>
+<th class="px-md py-sm text-on-surface-variant font-label-md uppercase tracking-wider cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+                                    Author <span class="material-symbols-outlined text-outline">unfold_more</span>
+</div>
+</th>
+<th class="w-32 px-md py-sm text-on-surface-variant font-label-md uppercase tracking-wider cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+                                    Year <span class="material-symbols-outlined text-outline">unfold_more</span>
+</div>
+</th>
+<th class="px-md py-sm text-on-surface-variant font-label-md uppercase tracking-wider cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+                                    Publisher <span class="material-symbols-outlined text-outline">unfold_more</span>
+</div>
+</th>
+<th class="px-md py-sm text-on-surface-variant font-label-md uppercase tracking-wider">
+                                Target Audience
+                            </th>
+<th class="w-40 px-md py-sm text-on-surface-variant font-label-md uppercase tracking-wider">
+                                Genre
+                            </th>
+<th class="w-16 px-md py-sm"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-md text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+</td>
+<td class="px-md py-md font-semibold text-on-surface">The Quantum Paradox</td>
+<td class="px-md py-md text-on-surface-variant">Dr. Aris Thorne</td>
+<td class="px-md py-md text-on-surface-variant">2023</td>
+<td class="px-md py-md text-on-surface-variant">Apex Scientific Press</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-metadata font-medium rounded-lg">Professional</span>
+</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-secondary-container text-on-secondary-container text-metadata font-medium rounded-lg">Non-Fiction</span>
+</td>
+<td class="px-md py-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-xs rounded transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-md text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+</td>
+<td class="px-md py-md font-semibold text-on-surface">Shadows of Neo-Tokyo</td>
+<td class="px-md py-md text-on-surface-variant">Kenji Nakamura</td>
+<td class="px-md py-md text-on-surface-variant">2021</td>
+<td class="px-md py-md text-on-surface-variant">Horizon Digital</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-metadata font-medium rounded-lg">Young Adult</span>
+</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-primary-container/10 text-primary text-metadata font-medium rounded-lg">Cyberpunk</span>
+</td>
+<td class="px-md py-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-xs rounded transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-md text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+</td>
+<td class="px-md py-md font-semibold text-on-surface">Ethics in Machine Learning</td>
+<td class="px-md py-md text-on-surface-variant">Sarah Jenkins</td>
+<td class="px-md py-md text-on-surface-variant">2024</td>
+<td class="px-md py-md text-on-surface-variant">Oxford University</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-metadata font-medium rounded-lg">Academic</span>
+</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-secondary-container text-on-secondary-container text-metadata font-medium rounded-lg">Ethics</span>
+</td>
+<td class="px-md py-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-xs rounded transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-md text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+</td>
+<td class="px-md py-md font-semibold text-on-surface">The Last Mars Colony</td>
+<td class="px-md py-md text-on-surface-variant">Elena Vance</td>
+<td class="px-md py-md text-on-surface-variant">2019</td>
+<td class="px-md py-md text-on-surface-variant">Starlight Publishing</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-metadata font-medium rounded-lg">General</span>
+</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-primary-container/10 text-primary text-metadata font-medium rounded-lg">Sci-Fi</span>
+</td>
+<td class="px-md py-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-xs rounded transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-md text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+</td>
+<td class="px-md py-md font-semibold text-on-surface">Visual Design Foundations</td>
+<td class="px-md py-md text-on-surface-variant">Marcus Reed</td>
+<td class="px-md py-md text-on-surface-variant">2022</td>
+<td class="px-md py-md text-on-surface-variant">Pixel Perfect</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-metadata font-medium rounded-lg">Beginner</span>
+</td>
+<td class="px-md py-md">
+<span class="px-sm py-0.5 bg-secondary-container text-on-secondary-container text-metadata font-medium rounded-lg">Design</span>
+</td>
+<td class="px-md py-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-xs rounded transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination / Footer Table -->
+<div class="mt-auto border-t border-outline-variant bg-surface-container-low px-lg py-sm flex items-center justify-between">
+<div class="text-metadata text-on-surface-variant">
+                        Showing 1-5 of 248 entries
+                    </div>
+<div class="flex items-center gap-sm">
+<span class="text-metadata text-on-surface-variant mr-md">Rows per page: 20</span>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-outline hover:text-primary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">first_page</span>
+</button>
+<button class="p-xs text-outline hover:text-primary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-xs px-md">
+<span class="px-sm py-xs bg-primary text-on-primary rounded text-metadata font-bold">1</span>
+<span class="px-sm py-xs hover:bg-surface-container-high rounded text-metadata cursor-pointer">2</span>
+<span class="px-sm py-xs hover:bg-surface-container-high rounded text-metadata cursor-pointer">3</span>
+<span class="text-metadata">...</span>
+<span class="px-sm py-xs hover:bg-surface-container-high rounded text-metadata cursor-pointer">25</span>
+</div>
+<button class="p-xs text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="p-xs text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">last_page</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Side Panel: Add New Book (Modal Proxy) -->
+<!-- Background Overlay for Side Panel -->
+
+
+</body></html>
